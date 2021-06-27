@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  postgres:
+    restart: always
+    container_name: pg_companies
+    image: postgres
+    environment:
+      - PGDATA=/data/postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345678
+      - POSTGRES_DB=companies
+    volumes:
+      - ./env/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5433:5432"
+    networks:
+      - db
+
+networks:
+  db:
+    driver: bridge
