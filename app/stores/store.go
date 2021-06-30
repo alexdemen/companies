@@ -1,5 +1,5 @@
 package stores
 
 type Store interface {
-	GetExecutor() Executor
+	GetExecutor() (Executor, error)
 }

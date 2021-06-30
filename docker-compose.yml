@@ -17,6 +17,18 @@ services:
     networks:
       - db
 
+  app:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/Dockerfile.app
+    container_name: company_catalog_app
+    environment:
+      - POSTGRES_CONNECTION_URL=postgres://postgres:12345678@pg_companies:5432/companies
+    ports:
+      - "8080:8080"
+    networks:
+      - db
+
 networks:
   db:
     driver: bridge

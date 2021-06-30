@@ -21,10 +21,9 @@ func (r *Router) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 }
 
 func (r *Router) Handle(method, path string, customHandler Handler) {
-
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		if err := customHandler(w, r); err != nil {
-
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	}
 

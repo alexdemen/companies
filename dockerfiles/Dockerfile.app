@@ -1,0 +1,10 @@
+FROM golang:1.16
+WORKDIR /app/source/
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o ./bin/app ./cmd/main.go
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+COPY --from=0 /app/source/bin/app .
+CMD ["./app"]

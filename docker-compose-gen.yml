@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  generator:
+    build:
+      context: .
+      dockerfile: ./dockerfiles/Dockerfile.gen
+    container_name: company_catalog_generator
+    environment:
+      - POSTGRES_CONNECTION_URL=postgres://postgres:12345678@127.0.0.1:5433/companies
+      - ORG_COUNT=100000
+      - BUILDING_COUNT=1000
+    network_mode: host
